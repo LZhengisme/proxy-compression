@@ -1,0 +1,18 @@
+{
+  "auto_map": {
+    "AutoImageProcessor": "image_processing_evabyte.EvaByteImageProcessor",
+    "AutoProcessor": "processing_evabyte.EvaByteProcessor"
+  },
+  "do_convert_rgb": true,
+  "do_resize": true,
+  "image_processor_type": "EvaByteImageProcessor",
+  "jpeg_quality": 25,
+  "jpeg_restart_marker_blocks": 1,
+  "jpeg_streamtype": 2,
+  "jpeg_subsampling": "4:2:0",
+  "processor_class": "EvaByteProcessor",
+  "resample": 1,
+  "size": {
+    "longest_edge": 384
+  }
+}

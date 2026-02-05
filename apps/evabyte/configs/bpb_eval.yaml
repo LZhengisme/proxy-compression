@@ -1,0 +1,40 @@
+name: "bpb_evals"
+dump_dir: "./bpb_evals"
+metric_log_dir: "./bpb_evals"
+ckpt_dir: ""
+seed: 42
+use_train_data_config: false
+use_train_doc_attn_mask_config: false
+apply_doc_boundary_mask: true
+evaluate_on_raw_only: false
+context_seqlen: 16384
+context_stride: 8192
+val_batch_size: 4
+val_data_path: data/validation_opencoder
+
+data:
+    root_dir: data/validation_opencoder
+    batch_size: 1
+    prefetch_size: 64
+    seq_len: 8192
+    n_views: 2
+    load_async: true
+    add_bos: true
+    add_eos: true
+    tokenizer:
+        name: hf
+        path: evabyte/EvaByte
+    compression_sampling_rate: 0.0
+    raw_compression_mix_option: sentinel
+    compression_alg_config: gzip
+
+distributed:
+    fsdp_type: full_shard
+    compile: true
+    model_dtype: bf16
+    matmul_allow_tf32: false
+    selective_activation_checkpointing: true
+    sac_config:
+        mode: full
+        selective_ac_option: 1
+    tp_size: 1

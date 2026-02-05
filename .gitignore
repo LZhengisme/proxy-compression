@@ -1,0 +1,10 @@
+*.pyc
+.vscode
+# *.ipynb
+slurm-*.out
+wandb
+logs/
+.venv/
+envs/
+data/
+checkpoints/

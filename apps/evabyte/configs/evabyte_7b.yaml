@@ -1,0 +1,65 @@
+dump_dir: "checkpoints/opencoder_7b_bsz-2m"
+log_dump_dir: "logs/opencoder_7b_bsz-2m"
+name: "opencoder_7b_bsz-2m"
+steps: 50000
+probe_freq: null
+seed: 42
+optim:
+    lr: 5e-4
+    weight_decay: 0.1
+    epsilon: 1e-15
+    beta1: 0.9
+    beta2: 0.95
+    clip: 1.0
+    scheduler: cosine
+    warmup: 500
+    lr_min_ratio: 0.1
+
+distributed:
+    dp_shard: 8
+    fsdp_type: full_shard
+    compile: true
+    model_dtype: bf16
+    matmul_allow_tf32: false
+    selective_activation_checkpointing: true
+    sac_config:
+        mode: full
+        selective_ac_option: 1
+    tp_size: 1
+
+model:
+    hidden_size: 4096
+    intermediate_size: 12288
+    num_hidden_layers: 32
+    num_attention_heads: 32
+    num_key_value_heads: 32
+    max_position_embeddings: 32768
+    num_pred_heads: 8
+    chunk_size: 8
+    window_size: 2048
+
+data:
+    root_dir: data
+    sources:
+        opencoder: 1.0
+    batch_size: 2
+    prefetch_size: 64
+    seq_len: 32768
+    n_views: 9
+    load_async: true
+    add_bos: true
+    add_eos: true
+    tokenizer:
+        name: hf
+        path: evabyte/EvaByte
+
+profiling:
+    run: false
+
+checkpoint:
+    dump:
+        every: 1000
+        keep: 0
+
+logging:
+    freq: 10

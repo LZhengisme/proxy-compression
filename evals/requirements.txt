@@ -1,0 +1,15 @@
+accelerate
+evaluate
+termcolor
+wget
+appdirs
+tempdir
+multipledispatch
+numpy
+tqdm
+termcolor
+fire
+rich
+tree_sitter>=0.22.0
+tree-sitter-python
+psutil
